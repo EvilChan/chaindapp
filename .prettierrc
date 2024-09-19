@@ -8,6 +8,7 @@
         "^react",
         "^react-dom",
         "^react-router-dom",
+        "^antd",
         "<THIRD_PARTY_MODULES>",
         "^@/(.*)$",
         "^./(.*)$",

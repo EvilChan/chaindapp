@@ -10,13 +10,18 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@ant-design/icons": "^5.5.0",
+        "antd": "^5.20.6",
+        "nprogress": "^0.2.0",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1"
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^6.26.2"
     },
     "devDependencies": {
         "@eslint/js": "^9.9.0",
         "@trivago/prettier-plugin-sort-imports": "^4.3.0",
         "@types/node": "^22.5.5",
+        "@types/nprogress": "^0.2.3",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
         "@vitejs/plugin-react-swc": "^3.5.0",
