@@ -9,7 +9,7 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
             <App>
                 <Layout className={"h-screen"}>
                     <Layout.Header
-                        className={"p-0 bg-white"}
+                        className={"px-4 py-0 bg-white"}
                         style={{ height: 50 }}
                     >
                         <Header />

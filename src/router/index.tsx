@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import PageLoading from "@/components/PageLoading.tsx";
 
 const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
 
 const router = createBrowserRouter(
     [
@@ -11,6 +12,14 @@ const router = createBrowserRouter(
             element: (
                 <Suspense fallback={<PageLoading />}>
                     <Home />
+                </Suspense>
+            ),
+        },
+        {
+            path: "/about",
+            element: (
+                <Suspense fallback={<PageLoading />}>
+                    <About />
                 </Suspense>
             ),
         },

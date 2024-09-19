@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import BaseLayout from "@/layouts/BaseLayout";
 
-const Home = () => {
+const About = () => {
     return (
         <BaseLayout>
-            Home
-            <Link to={"/about"}>About</Link>
+            About
+            <Link to={"/"}>首页</Link>
         </BaseLayout>
     );
 };
 
-export default Home;
+export default About;
