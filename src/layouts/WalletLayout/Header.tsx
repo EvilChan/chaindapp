@@ -14,7 +14,6 @@ const Header: FC = () => {
     const [isHover, setIsHover] = useState<boolean>(false);
 
     const init = async () => {
-        console.log(window.ethereum);
         const provider = new BrowserProvider(window.ethereum);
         const accounts = await provider.send("eth_accounts", {});
         if (accounts.length <= 0) return;
@@ -52,8 +51,8 @@ const Header: FC = () => {
     }, []);
 
     const connectWallet = async () => {
-        const provider = new BrowserProvider(window.ethereum);
         try {
+            const provider = new BrowserProvider(window.ethereum);
             await provider.send("eth_requestAccounts", {});
             init();
         } catch (error) {

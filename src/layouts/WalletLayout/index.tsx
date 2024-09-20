@@ -1,9 +1,9 @@
 import { FC, PropsWithChildren } from "react";
 import { App, ConfigProvider, Layout } from "antd";
 import zhCN from "antd/locale/zh_CN";
-import Header from "@/layouts/BaseLayout/Header.tsx";
+import Header from "@/layouts/WalletLayout/Header.tsx";
 
-const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
+const WalletLayout: FC<PropsWithChildren> = ({ children }) => {
     return (
         <ConfigProvider locale={zhCN}>
             <App>
@@ -25,4 +25,4 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
     );
 };
 
-export default BaseLayout;
+export default WalletLayout;

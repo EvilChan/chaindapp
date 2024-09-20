@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import BaseLayout from "@/layouts/BaseLayout";
+import WalletLayout from "@/layouts/WalletLayout";
 
 const About = () => {
     return (
-        <BaseLayout>
+        <WalletLayout>
             About
             <Link to={"/"}>首页</Link>
-        </BaseLayout>
+        </WalletLayout>
     );
 };
 
