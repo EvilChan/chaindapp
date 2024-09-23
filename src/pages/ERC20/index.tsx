@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { App, Button, Descriptions, Divider } from "antd";
 import NiceModal from "@ebay/nice-modal-react";
 import { BrowserProvider, toNumber } from "ethers";
-import GiveTokenModal from "@/pages/Home/components/GiveTokenModal.tsx";
+import GiveTokenModal from "@/pages/ERC20/components/GiveTokenModal.tsx";
 import { useWalletStore } from "@/stores/wallet.ts";
 import { FairyContract__factory } from "@/typechain-types";
 
-const Home = () => {
+const ERC20 = () => {
     const { modal } = App.useApp();
 
     const address = useWalletStore((state) => state.selectedAddress);
@@ -109,9 +109,12 @@ const Home = () => {
                 <Button type={"primary"} onClick={() => giveToken()}>
                     赠送代币
                 </Button>
+                <Button type={"primary"} onClick={() => giveToken()}>
+                    购买代币
+                </Button>
             </div>
         </div>
     );
 };
 
-export default Home;
+export default ERC20;

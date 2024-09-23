@@ -16,7 +16,7 @@ const createRouteElement = (load: Parameters<typeof lazy>[number]) => {
 };
 
 const WalletLayout = createRouteElement(() => import("@/layouts/WalletLayout"));
-const Home = createRouteElement(() => import("@/pages/Home"));
+const ERC20 = createRouteElement(() => import("../pages/ERC20"));
 const About = createRouteElement(() => import("@/pages/About"));
 
 const router = createBrowserRouter(
@@ -24,10 +24,15 @@ const router = createBrowserRouter(
         {
             path: "/",
             element: <WalletLayout />,
+            handle: {
+                meta: {
+                    title: "ERC20",
+                },
+            },
             children: [
                 {
                     index: true,
-                    element: <Home />,
+                    element: <ERC20 />,
                 },
             ],
         },
