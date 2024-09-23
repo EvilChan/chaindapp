@@ -13,6 +13,8 @@
     },
     "dependencies": {
         "@ant-design/icons": "^5.5.0",
+        "@ebay/nice-modal-react": "^1.2.13",
+        "ahooks": "^3.8.1",
         "antd": "^5.20.6",
         "classnames": "^2.5.1",
         "ethers": "^6.13.2",

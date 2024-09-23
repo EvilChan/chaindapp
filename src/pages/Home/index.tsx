@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { Button, Descriptions, Divider } from "antd";
+import { App, Button, Descriptions, Divider } from "antd";
+import NiceModal from "@ebay/nice-modal-react";
 import { BrowserProvider, toNumber } from "ethers";
-import WalletLayout from "@/layouts/WalletLayout";
+import GiveTokenModal from "@/pages/Home/components/GiveTokenModal.tsx";
 import { useWalletStore } from "@/stores/wallet.ts";
 import { FairyContract__factory } from "@/typechain-types";
 
 const Home = () => {
+    const { modal } = App.useApp();
+
     const address = useWalletStore((state) => state.selectedAddress);
 
     const [balance, setBalance] = useState<number>();
@@ -13,44 +16,60 @@ const Home = () => {
         name: string;
         symbol: string;
         totalSupply: number;
-        surplus: number;
     }>();
 
     const loadTokenInfo = async () => {
         const provider = new BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const contract = FairyContract__factory.connect(
-            "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+            import.meta.env.VITE_FAIRY_CONTRACT_ADDRESS,
             signer,
         );
 
         const name = await contract.name();
         const symbol = await contract.symbol();
         const totalSupply = await contract.totalSupply();
-        const balance = await contract.balanceOf(signer.address);
-        const surplus = await contract.balanceOf(
-            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-        );
 
-        setBalance(toNumber(balance));
         setTokenInfo({
             name,
             symbol,
             totalSupply: toNumber(totalSupply),
-            surplus: toNumber(surplus),
         });
+
+        const balance = await contract.balanceOf(signer.address);
+        setBalance(toNumber(balance));
     };
+
+    useEffect(() => {
+        loadTokenInfo();
+    }, []);
 
     useEffect(() => {
         if (address.length > 0) loadTokenInfo();
     }, [address]);
 
-    const mint = async () => {};
+    const mint = async () => {
+        const provider = new BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = FairyContract__factory.connect(
+            import.meta.env.VITE_FAIRY_CONTRACT_ADDRESS,
+            signer,
+        );
+        const tx = await contract.mint(100);
+        await tx.wait();
+        modal.success({
+            title: "交易地址",
+            content: tx.hash,
+        });
+        await loadTokenInfo();
+    };
 
-    const buy = async () => {};
+    const giveToken = async () => {
+        await NiceModal.show(GiveTokenModal);
+    };
 
     return (
-        <WalletLayout>
+        <div className={"p-4"}>
             <Descriptions
                 layout={"vertical"}
                 items={[
@@ -80,10 +99,6 @@ const Home = () => {
                         label: "代币总量",
                         children: tokenInfo?.totalSupply,
                     },
-                    {
-                        label: "代币剩余",
-                        children: tokenInfo?.surplus,
-                    },
                 ]}
             />
             <Divider />
@@ -91,11 +106,11 @@ const Home = () => {
                 <Button type={"primary"} onClick={() => mint()}>
                     铸币
                 </Button>
-                <Button type={"primary"} onClick={() => buy()}>
-                    购买代币
+                <Button type={"primary"} onClick={() => giveToken()}>
+                    赠送代币
                 </Button>
             </div>
-        </WalletLayout>
+        </div>
     );
 };
 
