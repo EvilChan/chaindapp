@@ -65,7 +65,9 @@ const ERC20 = () => {
     };
 
     const giveToken = async () => {
-        await NiceModal.show(GiveTokenModal);
+        await NiceModal.show(GiveTokenModal, {
+            reload: () => loadTokenInfo(),
+        });
     };
 
     return (

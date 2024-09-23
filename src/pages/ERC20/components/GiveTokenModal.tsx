@@ -10,7 +10,9 @@ type EditForm = {
     tokens: string;
 };
 
-const GiveTokenModal = NiceModal.create(() => {
+const GiveTokenModal = NiceModal.create<{
+    reload?: () => void;
+}>(({ reload }) => {
     const modal = useModal();
 
     const { modal: antdModal } = App.useApp();
@@ -39,6 +41,7 @@ const GiveTokenModal = NiceModal.create(() => {
                     title: "交易地址",
                     content: tx.hash,
                 });
+                reload?.();
             },
         },
     );

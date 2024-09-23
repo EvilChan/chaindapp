@@ -10,7 +10,7 @@
         "preview": "vite preview",
         "node": "hardhat node",
         "types": "hardhat compile",
-        "reset": "rimraf node_modules artifacts cache src/typechain-types"
+        "reset": "rimraf node_modules artifacts cache src/typechain-types && npm install"
     },
     "dependencies": {
         "@ant-design/icons": "^5.5.0",
