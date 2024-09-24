@@ -111,7 +111,10 @@ const GiveTokenModal = NiceModal.create<{
                         },
                     ]}
                 >
-                    <NumericInput placeholder={"请填写想要获取代币数量"} />
+                    <NumericInput
+                        disabled={typeof maxToken === "undefined"}
+                        placeholder={"请填写想要获取代币数量"}
+                    />
                 </Form.Item>
             </Form>
         </Modal>

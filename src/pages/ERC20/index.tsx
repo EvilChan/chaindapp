@@ -90,20 +90,6 @@ const ERC20 = () => {
                 layout={"vertical"}
                 items={[
                     {
-                        label: "当前钱包地址",
-                        children: address,
-                    },
-                    {
-                        label: "持有代币总量",
-                        children: balance,
-                    },
-                ]}
-            />
-            <Divider />
-            <Descriptions
-                layout={"vertical"}
-                items={[
-                    {
                         label: "代币名称",
                         children: tokenInfo?.name,
                     },
@@ -114,6 +100,20 @@ const ERC20 = () => {
                     {
                         label: "代币总量",
                         children: tokenInfo?.totalSupply,
+                    },
+                ]}
+            />
+            <Divider />
+            <Descriptions
+                layout={"vertical"}
+                items={[
+                    {
+                        label: "当前钱包地址",
+                        children: address,
+                    },
+                    {
+                        label: "持有代币总量",
+                        children: balance,
                     },
                 ]}
             />
