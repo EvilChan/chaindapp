@@ -4,7 +4,7 @@ import NiceModal, { antdModalV5, useModal } from "@ebay/nice-modal-react";
 import { useDebounceEffect, useRequest } from "ahooks";
 import { BrowserProvider, toNumber } from "ethers";
 import NumericInput from "@/components/NumericInput.tsx";
-import { FairyContract__factory } from "@/typechain-types";
+import { FairyToken__factory } from "@/typechain-types";
 
 type EditForm = {
     address: string;
@@ -25,7 +25,7 @@ const GiveTokenModal = NiceModal.create<{
         async (address: string) => {
             const provider = new BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
-            const contract = FairyContract__factory.connect(
+            const contract = FairyToken__factory.connect(
                 import.meta.env.VITE_FAIRY_CONTRACT_ADDRESS,
                 signer,
             );
@@ -53,7 +53,7 @@ const GiveTokenModal = NiceModal.create<{
 
             const provider = new BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
-            const contract = FairyContract__factory.connect(
+            const contract = FairyToken__factory.connect(
                 import.meta.env.VITE_FAIRY_CONTRACT_ADDRESS,
                 signer,
             );

@@ -6,7 +6,7 @@ import GetTokenModal from "@/pages/ERC20/components/GetTokenModal.tsx";
 import GiveTokenModal from "@/pages/ERC20/components/GiveTokenModal.tsx";
 import TransferTokenModal from "@/pages/ERC20/components/TransferTokenModal.tsx";
 import { useWalletStore } from "@/stores/wallet.ts";
-import { FairyContract__factory } from "@/typechain-types";
+import { FairyToken__factory } from "@/typechain-types";
 
 const ERC20 = () => {
     const { modal } = App.useApp();
@@ -23,7 +23,7 @@ const ERC20 = () => {
     const loadTokenInfo = async () => {
         const provider = new BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
-        const contract = FairyContract__factory.connect(
+        const contract = FairyToken__factory.connect(
             import.meta.env.VITE_FAIRY_CONTRACT_ADDRESS,
             signer,
         );
@@ -53,7 +53,7 @@ const ERC20 = () => {
     const mint = async () => {
         const provider = new BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
-        const contract = FairyContract__factory.connect(
+        const contract = FairyToken__factory.connect(
             import.meta.env.VITE_FAIRY_CONTRACT_ADDRESS,
             signer,
         );
@@ -130,9 +130,6 @@ const ERC20 = () => {
                 </Button>
                 <Button type={"primary"} onClick={() => getToken()}>
                     代币获取
-                </Button>
-                <Button type={"primary"} onClick={() => giveToken()}>
-                    购买代币
                 </Button>
             </div>
         </div>
