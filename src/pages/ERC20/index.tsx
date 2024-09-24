@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { App, Button, Descriptions, Divider } from "antd";
 import NiceModal from "@ebay/nice-modal-react";
 import { BrowserProvider, toNumber } from "ethers";
+import GetTokenModal from "@/pages/ERC20/components/GetTokenModal.tsx";
 import GiveTokenModal from "@/pages/ERC20/components/GiveTokenModal.tsx";
+import TransferTokenModal from "@/pages/ERC20/components/TransferTokenModal.tsx";
 import { useWalletStore } from "@/stores/wallet.ts";
 import { FairyContract__factory } from "@/typechain-types";
 
@@ -64,8 +66,20 @@ const ERC20 = () => {
         await loadTokenInfo();
     };
 
+    const transferToken = async () => {
+        await NiceModal.show(TransferTokenModal, {
+            reload: () => loadTokenInfo(),
+        });
+    };
+
     const giveToken = async () => {
         await NiceModal.show(GiveTokenModal, {
+            reload: () => loadTokenInfo(),
+        });
+    };
+
+    const getToken = async () => {
+        await NiceModal.show(GetTokenModal, {
             reload: () => loadTokenInfo(),
         });
     };
@@ -108,8 +122,14 @@ const ERC20 = () => {
                 <Button type={"primary"} onClick={() => mint()}>
                     铸币
                 </Button>
+                <Button type={"primary"} onClick={() => transferToken()}>
+                    代币转账
+                </Button>
                 <Button type={"primary"} onClick={() => giveToken()}>
-                    赠送代币
+                    代币赠送
+                </Button>
+                <Button type={"primary"} onClick={() => getToken()}>
+                    代币获取
                 </Button>
                 <Button type={"primary"} onClick={() => giveToken()}>
                     购买代币

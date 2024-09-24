@@ -10,7 +10,7 @@ type EditForm = {
     tokens: string;
 };
 
-const GiveTokenModal = NiceModal.create<{
+const TransferTokenModal = NiceModal.create<{
     reload?: () => void;
 }>(({ reload }) => {
     const modal = useModal();
@@ -29,7 +29,7 @@ const GiveTokenModal = NiceModal.create<{
                 signer,
             );
 
-            const tx = await contract.approve(address, tokens);
+            const tx = await contract.transfer(address, tokens);
             await tx.wait();
             return tx;
         },
@@ -49,8 +49,8 @@ const GiveTokenModal = NiceModal.create<{
     return (
         <Modal
             {...antdModalV5(modal)}
-            title={"赠送代币"}
-            okText={"赠送"}
+            title={"代币转账"}
+            okText={"转账"}
             okButtonProps={{
                 loading,
             }}
@@ -59,11 +59,11 @@ const GiveTokenModal = NiceModal.create<{
         >
             <Form preserve form={form} onFinish={(values) => give(values)}>
                 <Form.Item
-                    label={"赠送地址"}
+                    label={"转账地址"}
                     name={"address"}
                     rules={[{ required: true, message: "地址不能为空" }]}
                 >
-                    <Input placeholder={"请填写想要赠送代币的地址"} />
+                    <Input placeholder={"请填写想要转账的地址"} />
                 </Form.Item>
                 <Form.Item
                     label={"代币数量"}
@@ -71,11 +71,11 @@ const GiveTokenModal = NiceModal.create<{
                     initialValue={""}
                     rules={[{ required: true, message: "数量不能为空" }]}
                 >
-                    <NumericInput placeholder={"请填写想要赠送代币数量"} />
+                    <NumericInput placeholder={"请填写想要转账代币数量"} />
                 </Form.Item>
             </Form>
         </Modal>
     );
 });
 
-export default GiveTokenModal;
+export default TransferTokenModal;
