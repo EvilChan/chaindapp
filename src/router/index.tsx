@@ -16,6 +16,7 @@ const createRouteElement = (load: Parameters<typeof lazy>[number]) => {
 };
 
 const WalletLayout = createRouteElement(() => import("@/layouts/WalletLayout"));
+const NotFound = createRouteElement(() => import("@/pages/NotFound"));
 const ERC20 = createRouteElement(() => import("../pages/ERC20"));
 const About = createRouteElement(() => import("@/pages/About"));
 
@@ -43,6 +44,16 @@ const router = createBrowserRouter(
                 {
                     index: true,
                     element: <About />,
+                },
+            ],
+        },
+        {
+            path: "*",
+            element: <WalletLayout />,
+            children: [
+                {
+                    path: "*",
+                    element: <NotFound />,
                 },
             ],
         },

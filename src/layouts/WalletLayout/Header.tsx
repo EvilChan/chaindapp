@@ -1,22 +1,21 @@
 import { FC, useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { useLocation, useMatches } from "react-router-dom";
 import { App, Button } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import classnames from "classnames";
 import { BrowserProvider, isError } from "ethers";
+import { useSettingStore } from "@/stores/setting.ts";
 import { useWalletStore } from "@/stores/wallet.ts";
 
 const Header: FC = () => {
-    const location = useLocation();
-    const matches = useMatches();
-
     const { modal, message } = App.useApp();
+
+    const collapsed = useSettingStore((state) => state.collapsed);
+    const setCollapsed = useSettingStore((state) => state.setCollapsed);
 
     const address = useWalletStore((state) => state.selectedAddress);
     const setAddress = useWalletStore((state) => state.setSelectedAddress);
     const reset = useWalletStore((state) => state.reset);
 
-    const [subTitle, setSubTitle] = useState<string>();
     const [isHover, setIsHover] = useState<boolean>(false);
 
     const init = async () => {
@@ -56,21 +55,6 @@ const Header: FC = () => {
         }
     }, []);
 
-    useEffect(() => {
-        const subTitle = getSubTitle();
-        subTitle && setSubTitle(subTitle);
-    }, [location.pathname]);
-
-    const getSubTitle = () => {
-        const route = matches.find(
-            (item) => item.pathname === location.pathname,
-        );
-        if (route?.handle) {
-            return (route.handle as { meta: { title: string } }).meta.title;
-        }
-        return void 0;
-    };
-
     const connectWallet = async () => {
         try {
             const provider = new BrowserProvider(window.ethereum);
@@ -85,16 +69,24 @@ const Header: FC = () => {
     };
 
     return (
-        <div className={"h-full flex"}>
+        <div className={"pr-4 h-full flex"}>
             <div className={"flex-1 flex"}>
-                <Helmet>
-                    <title>
-                        {subTitle
-                            ? `${subTitle} - ${import.meta.env.VITE_APP_TITLE}`
-                            : import.meta.env.VITE_APP_TITLE}
-                    </title>
-                </Helmet>
-                <h1>{subTitle}</h1>
+                <Button
+                    type="text"
+                    icon={
+                        collapsed ? (
+                            <MenuUnfoldOutlined />
+                        ) : (
+                            <MenuFoldOutlined />
+                        )
+                    }
+                    onClick={() => setCollapsed(!collapsed)}
+                    style={{
+                        fontSize: "16px",
+                        width: 50,
+                        height: 50,
+                    }}
+                />
             </div>
             <div className={"flex items-center"}>
                 {address ? (
