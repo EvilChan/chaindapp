@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import PageLoading from "@/components/PageLoading.tsx";
 
 /**
@@ -17,7 +17,10 @@ const createRouteElement = (load: Parameters<typeof lazy>[number]) => {
 
 const WalletLayout = createRouteElement(() => import("@/layouts/WalletLayout"));
 const NotFound = createRouteElement(() => import("@/pages/NotFound"));
-const ERC20 = createRouteElement(() => import("../pages/ERC20"));
+const FairyToken = createRouteElement(
+    () => import("../pages/ERC20/FairyToken"),
+);
+const FairyNFT = createRouteElement(() => import("../pages/ERC721/FairyNFT"));
 const About = createRouteElement(() => import("@/pages/About"));
 
 const router = createBrowserRouter(
@@ -33,7 +36,15 @@ const router = createBrowserRouter(
             children: [
                 {
                     index: true,
-                    element: <ERC20 />,
+                    element: <Navigate to={"/fairyToken"} />,
+                },
+                {
+                    path: "/fairyToken",
+                    element: <FairyToken />,
+                },
+                {
+                    path: "/fairyNFT",
+                    element: <FairyNFT />,
                 },
             ],
         },

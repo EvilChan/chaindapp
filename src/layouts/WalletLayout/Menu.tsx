@@ -15,7 +15,7 @@ const Menu = () => {
                     label: "ERC20",
                     key: "erc20",
                     type: "group",
-                    children: [{ label: "FairyToken", key: "/" }],
+                    children: [{ label: "FairyToken", key: "/fairyToken" }],
                 },
                 {
                     label: "ERC721",

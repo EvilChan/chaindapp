@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { App, Button, Descriptions, Divider } from "antd";
 import NiceModal from "@ebay/nice-modal-react";
 import { BrowserProvider, toNumber } from "ethers";
-import GetTokenModal from "@/pages/ERC20/components/GetTokenModal.tsx";
-import GiveTokenModal from "@/pages/ERC20/components/GiveTokenModal.tsx";
-import TransferTokenModal from "@/pages/ERC20/components/TransferTokenModal.tsx";
+import GetTokenModal from "@/pages/ERC20/FairyToken/components/GetTokenModal.tsx";
+import GiveTokenModal from "@/pages/ERC20/FairyToken/components/GiveTokenModal.tsx";
+import TransferTokenModal from "@/pages/ERC20/FairyToken/components/TransferTokenModal.tsx";
 import { useWalletStore } from "@/stores/wallet.ts";
 import { FairyToken__factory } from "@/typechain-types";
 
-const ERC20 = () => {
+const FairyToken = () => {
     const { modal } = App.useApp();
 
     const address = useWalletStore((state) => state.selectedAddress);
@@ -136,4 +136,4 @@ const ERC20 = () => {
     );
 };
 
-export default ERC20;
+export default FairyToken;
